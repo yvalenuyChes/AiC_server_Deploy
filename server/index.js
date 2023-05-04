@@ -1,13 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const next = require('next')
 const { default: mongoose } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
 const handle = app.getRequestHandler()
 const PORT = process.env.PORT || 3000
 
