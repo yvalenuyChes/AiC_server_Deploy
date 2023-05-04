@@ -5,24 +5,22 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
-const handle = app.getRequestHandler()
-const PORT = process.env.PORT || 3000
 
-const UserSchema = require('./Models/user')
+const PORT = process.env.PORT || 8000
+
+const UserSchema = require('./server/Models/user')
 
 
-const send_verification_letter = require('./routes/send_verification_letter')
-const signup = require('./routes/signup')
+const send_verification_letter = require('./server/routes/send_verification_letter')
+const signup = require('./server/routes/signup')
 // const login = require('./routes/login')
 
-app.prepare()
-    .then(() => {
+
         const server = express()
         server.use(bodyParser.json())
         server.use(bodyParser.urlencoded({ extended: true }))
 
-        const DATABASE_URL = process.env.DB_URL
-
+        const DATABASE_URL = 'mongodb+srv://vlados:26029830052tapor@projectdb.lss9m.mongodb.net/?retryWrites=true&w=majority'
         mongoose
             .connect(DATABASE_URL, {
                 useNEWUrlParser: true,
@@ -336,7 +334,3 @@ app.prepare()
             if (err) throw err
             console.log('> Ready on http://localhost:3000')
         })
-    })
-    .catch((ex) => {
-        process.exit(1)
-    })
