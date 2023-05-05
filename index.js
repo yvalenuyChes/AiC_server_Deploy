@@ -326,11 +326,7 @@ const signup = require('./server/routes/signup')
           });
 
 
-        server.get('*', (req, res) => {
-            return handle(req, res)
-        })
-
         server.listen(PORT, (err) => {
             if (err) throw err
             console.log('> Ready on http://localhost:3000')
-        })
+        })  
