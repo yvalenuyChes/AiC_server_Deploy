@@ -110,7 +110,7 @@ const signup = require('./server/routes/signup')
             console.log(token)
             // console.log(token);
             // const cookie = token.slice(6)
-            const decoded = jwt.decode(cookie)
+            const decoded = jwt.decode(token)
             UserSchema.findOne({email:decoded.userEmail})
             .then((result,err) => {
                     if(result){
