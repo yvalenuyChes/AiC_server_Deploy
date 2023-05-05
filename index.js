@@ -20,7 +20,7 @@ const signup = require('./server/routes/signup')
         server.use(bodyParser.json())
         server.use(bodyParser.urlencoded({ extended: true }))
 
-        const DATABASE_URL = process.env.DB_URL
+        const DATABASE_URL =  'mongodb+srv://vlados:26029830052tapor@projectdb.lss9m.mongodb.net/?retryWrites=true&w=majority'
         mongoose
             .connect(DATABASE_URL, {
                 useNEWUrlParser: true,
@@ -38,7 +38,7 @@ const signup = require('./server/routes/signup')
                  res.setHeader("Access-Control-Allow-Origin", "*")
                  res.setHeader(
                    "Access-Control-Allow-Headers",
-                   "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization",
+                   "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, cookie",
                  )
                  res.setHeader(
                    "Access-Control-Allow-Methods",
@@ -107,7 +107,7 @@ const signup = require('./server/routes/signup')
 
         server.get('/user',  (req,res)=> {
             const token = req.headers.cookie
-            console.log(req.cookies);
+            console.log(token);
             const cookie = token.slice(6)
             const decoded = jwt.decode(cookie)
             UserSchema.findOne({email:decoded.userEmail})
@@ -328,5 +328,5 @@ const signup = require('./server/routes/signup')
        
         server.listen(PORT, (err) => {
             if (err) throw err
-            console.log('> Ready on http://localhost:3000')
+            console.log(`> Ready on http://localhost:${PORT}`)
         })
