@@ -20,7 +20,7 @@ const signup = require('./server/routes/signup')
         server.use(bodyParser.json())
         server.use(bodyParser.urlencoded({ extended: true }))
 
-        const DATABASE_URL = 'mongodb+srv://vlados:26029830052tapor@projectdb.lss9m.mongodb.net/?retryWrites=true&w=majority'
+        const DATABASE_URL = process.env.DB_URL
         mongoose
             .connect(DATABASE_URL, {
                 useNEWUrlParser: true,
