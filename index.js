@@ -106,20 +106,26 @@ const signup = require('./server/routes/signup')
         // })
 
         server.get('/user',  (req,res)=> {
+
             const token = req.headers.authorization
-            console.log(token)
-            // console.log(token);
-            // const cookie = token.slice(6)
-            const decoded = jwt.decode(token)
-            UserSchema.findOne({email:decoded.userEmail})
-            .then((result,err) => {
-                    if(result){
-                        res.status(200).send(result)
-                    }else{
-                        console.log(err)
+            if (token ){
+                const decoded = jwt.decode(token)
+                UserSchema.findOne({email:decoded.userEmail})
+                .then((result,err) => {
+                        if(result){
+                            res.status(200).send(result)
+                        }else{
+                            console.log(err)
+                        }
                     }
-                }
-            )
+                )
+            }else{
+                res.status(404).send({
+                    message:'Авторизируйтесь пожалуйста'
+                })
+            }
+            
+           
         })
 
         server.post('/send_reset_password_code', (req, res)=> {
